@@ -12,9 +12,13 @@ const VoyageSchema = new mongoose.Schema({
   voyageNumber: String,
   departureDate: Date,
   departurePort: String,
+  departureCountry: String,   // <-- Added
   arrivalDate: Date,
   arrivalPort: String,
+  arrivalCountry: String,     // <-- Added
   cargo: CargoSchema,
+  agent: String,              // <-- Added
+  consignee: String,          // <-- Added
   remarks: String
 });
 
