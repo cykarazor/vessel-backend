@@ -31,6 +31,23 @@ app.post('/api/voyages', async (req, res) => {
   }
 });
 
+// EDIT/UPDATE ROUTE (add this)
+app.put('/api/voyages/:id', async (req, res) => {
+  try {
+    const updatedVoyage = await Voyage.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedVoyage) {
+      return res.status(404).json({ message: 'Voyage not found' });
+    }
+    res.json(updatedVoyage);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 app.listen(process.env.PORT || 5000, () => {
   console.log('Server is running...');
 });
