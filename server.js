@@ -9,11 +9,15 @@ app.use(express.json());
 
 const Voyage = require('./models/Voyage');
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
+
+// ✅ Auth routes
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
 
 // Routes
 app.get('/api/voyages', async (req, res) => {
